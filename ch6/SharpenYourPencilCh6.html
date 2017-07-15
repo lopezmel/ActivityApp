@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Playlist</title>
+    <script>
+        function addSong() {
+
+            var song1 = document.getElementById("song1");
+            var song2 = document.getElementById("Song2");
+            var song3 = document.getElementById("Song3");
+
+            song1.innerHTML = "Blue suede Strings, by Elvis Pagely";
+            song2.innerHTML = "Great Objects on Fire, by Jerry JSON Lewis";
+            song3.innerHTML = "I Code the Line, by Johnny JavaScript";
+        }
+        window.onload = addSongs;
+    </script>
+</head>
+<body>
+    <h1>my Awesome Playlist</h1>
+    <ul id="playlist">
+        <li id="song1"></li>
+        <li id="song2"></li>
+        <li id="song3"></li>
+    </ul>
+
+</body>
+</html>
