@@ -1,7 +1,6 @@
 /**
  * Created by melissalopez
  */
-
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
@@ -12,14 +11,49 @@ var port = 3000;
 var app = express();
 
 app.use(morgan('dev'));
-app.use(bodyParser.json());
 
-app.all('/activities', function(req,res,next) {
-    res.writeHead(200, { 'Content-Type': 'text/plain'}
+
+var activities = express.Router();
+
+activities.use(bodyParser.json());
+
+activities.route('/')
+    .all(function(req,res,next) {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
         next();
-});
+    })
 
-    app.get('/activities', function(req,res,next){
-        res.end('Will send all the dishes to you!');
+    .get(function(req,res,next){
+        res.end('All activities are being sent!');
+    })
+
+    .post(function(req, res, next){
+        res.end('Adding the following activity' + req.body.name + ' with details: ' + req.body.description);
+    })
+
+    .delete(function(req, res, next){
+        res.end('Deleting all actvities');
     });
+
+activities.route('/:actId')
+    .all(function(req,res,next) {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        next();
+    })
+
+    .get(function(req,res,next){
+        res.end('Will get the following activity details: ' + req.params.actId +' to you!');
+    })
+
+    .put(function(req, res, next){
+        res.write('Updating the followingactiviy ' + req.params.actId + '\n');
+        res.end('Will update the activity: ' + req.body.name +
+            ' with details: ' + req.body.description);
+    })
+
+    .delete(function(req, res, next){
+        res.end('Deleting activiity: ' + req.params.actId);
+    });
+
+app.use('/act',activities);
 
