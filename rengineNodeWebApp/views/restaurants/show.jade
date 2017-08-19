@@ -1,10 +1,12 @@
 extends ../layout
-
+//show the details view
 block content
     p
         a(href='/restaurants/') Show all
     h1.
+
         #{restaurants.name}
+
     //p Name: #{restaurants.name}
     p Address: #{restaurants.address}
     p City: #{restaurants.city}

@@ -1,6 +1,11 @@
 /**
  * Created by melissalopez
  */
+
+    //1. get a list of activities
+    //2. edit and update activity
+    //3. create a new activity
+    //4. Delete activity
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
@@ -15,16 +20,17 @@ router.use(methodOverride(function(req, res){
         return method
     }
 }))
-
+//get request to get list of activities
 router.route('/')
-//making get request
     .get(function(req, res, next) {
         mongoose.model('Restaurants').find({}, function (err, restaurants) {
             if (err) {
+                console.log('Error ' + restaurants._id);
                 return console.error(err);
             } else {
                 res.format({
                     html: function(){
+                        //display title
                         res.render('restaurants/index', {
                             title: 'All my Restaurants',
                             "restaurants" : restaurants
@@ -39,6 +45,7 @@ router.route('/')
     })
 
     //making post request
+    //following info is displayed in the form to edit and add new
     .post(function(req, res) {
         var name = req.body.name;
         var address = req.body.address;
@@ -48,6 +55,7 @@ router.route('/')
         var des = req.body.des;
         var rate = req.body.rate;
 
+        //mongoose schemas
         mongoose.model('Restaurants').create({
             name : name,
             address : address,
@@ -57,11 +65,12 @@ router.route('/')
             des: des,
             rate: rate
 
+            //post request when a new activity is added
         }, function (err, restaurants) {
             if (err) {
-                res.send("There was a problem adding the information to the database.");
+                res.send("Error: Did not work!");
             } else {
-                console.log('POST creating new restaurants: ' + restaurants);
+                console.log('Msg: adding activity' + restaurants);
                 res.format({
                     html: function(){
                         res.location("restaurants");
@@ -75,17 +84,18 @@ router.route('/')
         })
     });
 
+//get request when adding a new activity
 router.get('/new', function(req, res) {
-    res.render('restaurants/new', { title: 'Add New restaurants' });
+    res.render('restaurants/new', { title: 'New Activity' });
 });
 
 router.param('id', function(req, res, next, id) {
 
     mongoose.model('Restaurants').findById(id, function (err, restaurants) {
         if (err) {
-            console.log(id + ' was not found');
+            console.log(id + ' Error');
             res.status(404)
-            var err = new Error('Not Found');
+            var err = new Error('Fix! 404');
             err.status = 404;
             res.format({
                 html: function(){
@@ -103,34 +113,15 @@ router.param('id', function(req, res, next, id) {
     });
 });
 
-router.route('/:id')
-    .get(function(req, res) {
-        mongoose.model('Restaurants').findById(req.id, function (err, restaurants) {
-            if (err) {
-                console.log('GET Error: There was a problem retrieving: ' + err);
-            } else {
-                console.log('GET Retrieving ID: ' + restaurants._id);
-                res.format({
-                    html: function(){
-                        res.render('restaurants/show', {
-                            "restaurants" : restaurants
-                        });
-                    },
-                    json: function(){
-                        res.json(restaurants);
-                    }
-                });
-            }
-        });
-    });
 
+//edit activity
 router.route('/:id/edit')
     .get(function(req, res) {
         mongoose.model('Restaurants').findById(req.id, function (err, restaurants) {
             if (err) {
-                console.log('GET Error: There was a problem retrieving: ' + err);
+                console.log('Error' + err);
             } else {
-                console.log('GET Retrieving ID: ' + restaurants._id);
+                console.log('Success' + restaurants._id);
 
                 res.format({
                     html: function(){
@@ -146,7 +137,36 @@ router.route('/:id/edit')
             }
         });
     })
-    //PUT to update
+
+    ///delete actiivty
+    .delete(function (req, res){
+        mongoose.model('Restaurants').findById(req.id, function (err, restaurants) {
+            if (err) {
+                return console.error(err);
+            } else {
+                restaurants.remove(function (err, restaurants) {
+                    if (err) {
+                        console.log('Error' + restaurants._id);
+                        return console.error(err);
+                    } else {
+                        console.log('Success ' + restaurants._id);
+                        res.format({
+                            html: function(){
+                                res.redirect("/restaurants");
+                            },
+                            json: function(){
+                                res.json({message : 'deleted',
+                                    item : restaurants
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    })
+
+    //PUT to update actiivty
     .put(function(req, res) {
         var name = req.body.name;
         var address = req.body.address;
@@ -169,7 +189,7 @@ router.route('/:id/edit')
 
             }, function (err, restaurantsID) {
                 if (err) {
-                    res.send("There was a problem updating the information to the database: " + err);
+                    res.send("Error" + err);
                 }
                 else {
                     res.format({
@@ -183,27 +203,24 @@ router.route('/:id/edit')
                 }
             })
         });
-    })
-    .delete(function (req, res){
+    });
+
+//show activity details
+router.route('/:id')
+    .get(function(req, res) {
         mongoose.model('Restaurants').findById(req.id, function (err, restaurants) {
             if (err) {
-                return console.error(err);
+                console.log('Error: Fix!' + err);
             } else {
-                restaurants.remove(function (err, restaurants) {
-                    if (err) {
-                        return console.error(err);
-                    } else {
-                        console.log('DELETE removing ID: ' + restaurants._id);
-                        res.format({
-                            html: function(){
-                                res.redirect("/restaurants");
-                            },
-                            json: function(){
-                                res.json({message : 'deleted',
-                                    item : restaurants
-                                });
-                            }
+                console.log('Success ' + restaurants._id);
+                res.format({
+                    html: function(){
+                        res.render('restaurants/show', {
+                            "restaurants" : restaurants
                         });
+                    },
+                    json: function(){
+                        res.json(restaurants);
                     }
                 });
             }

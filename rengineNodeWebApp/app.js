@@ -10,6 +10,7 @@ var db = require('./model/db');
 var agendas = require('./model/agendas');
 var restaurant = require('./model/restaurants');
 
+//must declare routes here
 //routes
 var routes = require('./routes/index');
 var agendas = require('./routes/agendas');
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//in the app use
 app.use('/', routes);
 app.use('/restaurants', restaurants);
 app.use('/agendas', agendas);

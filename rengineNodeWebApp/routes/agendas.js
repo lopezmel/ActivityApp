@@ -2,12 +2,17 @@
  * Created by melissalopez
  */
 
+    //1. get a list agendas
+    //2. edit a agenda
+    //3. create a new agenda
+    //4. delete a agenda
+    //TODO: Add activities to agendas
 
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var mongoose = require('mongoose'); //for schema
+var bodyParser = require('body-parser'); //helper for post
+var methodOverride = require('method-override'); //helper for post
 
 
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -19,6 +24,7 @@ router.use(methodOverride(function(req, res){
     }
 }))
 
+//get list of agendas
 router.route('/')
     .get(function(req, res, next) {
         mongoose.model('Agendas').find({}, function (err, agendas) {
@@ -40,6 +46,7 @@ router.route('/')
         });
     })
 
+    //post agenda when created
     .post(function(req, res) {
         var name = req.body.name;
         var description = req.body.description;
@@ -65,6 +72,7 @@ router.route('/')
         })
     });
 
+//create a new agenda
 router.get('/new', function(req, res) {
     res.render('agendas/new', { title: 'Add New agendas' });
 });
@@ -91,6 +99,7 @@ router.param('id', function(req, res, next, id) {
     });
 });
 
+//show details of agenda
 router.route('/:id')
     .get(function(req, res) {
         mongoose.model('Agendas').findById(req.id, function (err, agendas) {
@@ -112,6 +121,7 @@ router.route('/:id')
         });
     });
 
+//edit a new agenda
 router.route('/:id/edit')
     .get(function(req, res) {
         mongoose.model('Agendas').findById(req.id, function (err, agendas) {
@@ -159,7 +169,7 @@ router.route('/:id/edit')
             })
         });
     })
-    //Delete
+    //Delete agenda
     .delete(function (req, res){
         mongoose.model('Agendas').findById(req.id, function (err, agendas) {
             if (err) {

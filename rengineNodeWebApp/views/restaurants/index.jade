@@ -1,6 +1,7 @@
 extends ../layout
 block content
 
+    //menu
     .menu
         h2 Menu
         ul.nav.nav-pills
@@ -12,10 +13,10 @@ block content
                 a(href="/agendas") Agendas
 
 
-
     h1.
         #{title}
 
+    //create a new activity
     p
         a(href='/restaurants/new') Add new
 
@@ -25,7 +26,7 @@ block content
                 = act.name
                 //= act.address
 
-
+            //delete activities
             //console.log("test", restaurants._id)
             form(action='/restaurants/#{act._id}/edit', method='post', enctype='application/x-www-form-urlencoded')
                 input(type='hidden', value='DELETE', name='_method')
