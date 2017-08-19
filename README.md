@@ -1,16 +1,21 @@
 # My project's README
 
-Install node.js from the following:
-    https://nodejs.org/en/
+1. Start by installing:
+    - Node.js from https://nodejs.org/en/download/
+    - MongoDB from https://docs.mongodb.com/getting-started/shell/installation/
 
-Install MongoDB from the following:
-    https://www.mongodb.com/
+2. Download or clone project
 
-Install the following modules:
-    npm install morgan --save
-    npm install express --save
-    npm install body-parser --save
+3. cd rengineApp
 
+4. npm install
 
-Start server by typing:
-    node server
+5. Install the following modules:
+    - npm install morgan --save
+    - npm install express --save
+    - npm install body-parser --save
+
+6. Start server:
+    - npm start
+    
+7.  Start browser: http://localhost:3000/
