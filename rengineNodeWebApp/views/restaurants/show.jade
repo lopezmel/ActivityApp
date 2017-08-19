@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    p
+        a(href='/restaurants/') Show all
+    h1.
+        #{restaurants.name}
+    //p Name: #{restaurants.name}
+    p Address: #{restaurants.address}
+    p City: #{restaurants.city}
+    p State: #{restaurants.state}
+    p Zipcode: #{restaurants.zip}
+    p Description: #{restaurants.des}
+    p Rating: #{restaurants.rate}
+
+    p
+        a(href='/restaurants/#{restaurants._id}/edit') Edit
+
+

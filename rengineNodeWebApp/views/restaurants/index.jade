@@ -1,0 +1,37 @@
+extends ../layout
+block content
+
+    .menu
+        h2 Menu
+        ul.nav.nav-pills
+            li.active
+                a(href="/") Home
+            li
+                a(href="/Restaurants") Activities List
+            li
+                a(href="/agendas") Agendas
+
+
+
+    h1.
+        #{title}
+
+    p
+        a(href='/restaurants/new') Add new
+
+    ul
+        - each act, i in restaurants
+            li
+                = act.name
+                //= act.address
+
+
+            //console.log("test", restaurants._id)
+            form(action='/restaurants/#{act._id}/edit', method='post', enctype='application/x-www-form-urlencoded')
+                input(type='hidden', value='DELETE', name='_method')
+                button(type='submit').
+                        Delete
+            p
+                    a(href='/restaurants/#{act._id}/edit') Edit
+            p
+                    a(href='/restaurants/#{act._id}') Show

@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    h1.
+        #{title}
+    form#formAddBlob(name="addrestaurant",method="post",action="/restaurants")
+        p Name
+            input#inputName(type="text", placeholder="ex. Cafe Yumm", name="name")
+        p Address:
+            input#inputAddress(type="text", placeholder="ex. 123 NE Loma", name="address")
+        p City:
+            input#inputCity(type="text", placeholder="ex. Bend", name="city")
+        p State:
+            input#inputState(type="text", placeholder="ex. OR", name="state")
+        p Zipcode:
+            input#inputZipcode(type="number", placeholder="ex. 97702", name="zip")
+        p Description:
+            input#inputDes(type="text", placeholder="This activity...", name="des")
+        p Rating:
+            input#inputRate(type="text", placeholder="ex. 5", name="rate")
+
+        p
+            button#btnSubmit(type="submit") submit

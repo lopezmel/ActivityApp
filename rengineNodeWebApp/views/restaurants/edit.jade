@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+    h1.
+        Restaurant: #{restaurants.name}
+    form(action='/restaurants/#{restaurants._id}/edit',method='post',name='update',enctype='application/x-www-form-urlencoded')
+        p Name:
+            input#inputName(type='text', value='#{restaurants.name}', name='name')
+        p Address:
+            input#inputAddress(type='text', value='#{restaurants.address}', name='address')
+        p City:
+            input#inputCity(type='text', value='#{restaurants.city}', name='city')
+        p State:
+            input#inputState(type='text', value='#{restaurants.state}', name='state')
+        p Zipcode:
+            input#inputZip(type='number', value='#{restaurants.zip}', name='zip')
+        p Description:
+            input#inputDes(type='text', value='#{restaurants.des}', name='des')
+        p Rate:
+            input#inputRate(type='number', value='#{restaurants.rate}', name='rate')
+        p
+            input(type='hidden',value='PUT',name='_method')
+        p
+            button#btnSubmit(type='submit').
+                Update
