@@ -1,0 +1,32 @@
+extends ../layout
+block content
+    .menu
+        h2 Menu
+        ul.nav.nav-pills
+            li.active
+                a(href="/") Home
+            li
+                a(href="/Restaurants") Restaurant List
+            li
+                a(href="/agendas") Agendas
+
+    h1.
+        #{title}
+
+    p
+        a(href='/agendas/new') Add new
+
+    ul
+        - each agenda, i in agendas
+            li
+                = agenda.name
+            //console.log("test", restaurants._id)
+            //enctype='application/x-www-form-urlencoded' = the form will be encoded when submitted to server
+            form(action='/agendas/#{agenda._id}/edit', method='post')
+                input(type='hidden', value='DELETE', name='_method')
+                button(type='submit').
+                        Delete
+            p
+                    a(href='/agendas/#{agenda._id}/edit') Edit
+            p
+                    a(href='/agendas/#{agenda._id}') Show

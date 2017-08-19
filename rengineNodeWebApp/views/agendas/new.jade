@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    h1.
+        #{title}
+    form#formAddAgendas(name="addAgenda",method="post",action="/agendas")
+        p Name:
+            input#inputName(type="text", placeholder="ex. Spring Break", name="name")
+        p Description:
+            input#inputDes(type="text", placeholder="This agenda is for...", name="description")
+        p
+            button#buttonSubmit(type="submit") submit
