@@ -1,9 +1,11 @@
 extends ../layout
 //form to submit (put request)
+    //Todo: add bootstrap
+
 block content
     h1.
         Restaurant: #{restaurants.name}
-    form(action='/restaurants/#{restaurants._id}/edit',method='post',name='update',enctype='application/x-www-form-urlencoded')
+    form(action='/restaurants/#{restaurants._id}/editeditActivities',method='post',name='update',enctype='application/x-www-form-urlencoded')
         p Name:
             input#inputName(type='text', value='#{restaurants.name}', name='name')
         p Address:

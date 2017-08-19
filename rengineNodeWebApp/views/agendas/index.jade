@@ -1,4 +1,5 @@
 extends ../layout
+//Todo: add bootstrap
 
 block content
 
@@ -18,7 +19,7 @@ block content
         #{title}
 
     p
-        a(href='/agendas/new') Add new
+        a(href='/agendas/newAgenda') Add new
 
     ul
         - each agenda, i in agendas
@@ -26,11 +27,11 @@ block content
                 = agenda.name
             //console.log("test", restaurants._id)
             //enctype='application/x-www-form-urlencoded' = the form will be encoded when submitted to server
-            form(action='/agendas/#{agenda._id}/edit', method='post')
+            form(action='/agendas/#{agenda._id}/editAgenda', method='post')
                 input(type='hidden', value='DELETE', name='_method')
                 button(type='submit').
                         Delete
             p
-                    a(href='/agendas/#{agenda._id}/edit') Edit
+                    a(href='/agendas/#{agenda._id}/editAgenda') Edit
             p
                     a(href='/agendas/#{agenda._id}') Show

@@ -1,4 +1,7 @@
 extends ../layout
+
+//Todo: add bootstrap
+
 block content
 
     //menu
@@ -18,7 +21,7 @@ block content
 
     //create a new activity
     p
-        a(href='/restaurants/new') Add new
+        a(href='/restaurants/newActivity') Add new
 
     ul
         - each act, i in restaurants
@@ -28,11 +31,11 @@ block content
 
             //delete activities
             //console.log("test", restaurants._id)
-            form(action='/restaurants/#{act._id}/edit', method='post', enctype='application/x-www-form-urlencoded')
+            form(action='/restaurants/#{act._id}/editActivities', method='post', enctype='application/x-www-form-urlencoded')
                 input(type='hidden', value='DELETE', name='_method')
                 button(type='submit').
                         Delete
             p
-                    a(href='/restaurants/#{act._id}/edit') Edit
+                    a(href='/restaurants/#{act._id}/editActivities') Edit
             p
                     a(href='/restaurants/#{act._id}') Show

@@ -73,8 +73,8 @@ router.route('/')
     });
 
 //create a new agenda
-router.get('/new', function(req, res) {
-    res.render('agendas/new', { title: 'Add New agendas' });
+router.get('/newAgenda', function(req, res) {
+    res.render('agendas/newAgenda', { title: 'Add New agendas' });
 });
 
 router.param('id', function(req, res, next, id) {
@@ -109,7 +109,7 @@ router.route('/:id')
                 console.log('GET Retrieving ID: ' + agendas._id);
                 res.format({
                     html: function(){
-                        res.render('agendas/show', {
+                        res.render('agendas/details', {
                             "agendas" : agendas
                         });
                     },
@@ -122,7 +122,7 @@ router.route('/:id')
     });
 
 //edit a new agenda
-router.route('/:id/edit')
+router.route('/:id/editActivity')
     .get(function(req, res) {
         mongoose.model('Agendas').findById(req.id, function (err, agendas) {
             if (err) {
@@ -131,7 +131,7 @@ router.route('/:id/edit')
                 console.log('GET Retrieving ID: ' + agendas._id);
                 res.format({
                     html: function(){
-                        res.render('agendas/edit', {
+                        res.render('agendas/editActivity', {
                             title: 'Agendas' + agendas._id,
                             "agendas" : agendas
                         });

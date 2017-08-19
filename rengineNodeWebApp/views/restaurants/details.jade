@@ -1,5 +1,7 @@
 extends ../layout
 //show the details view
+    //Todo: add bootstrap
+
 block content
     p
         a(href='/restaurants/') Show all
@@ -16,6 +18,6 @@ block content
     p Rating: #{restaurants.rate}
 
     p
-        a(href='/restaurants/#{restaurants._id}/edit') Edit
+        a(href='/restaurants/#{restaurants._id}/editActivities') Edit
 
 

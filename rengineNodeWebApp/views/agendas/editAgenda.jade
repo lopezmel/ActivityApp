@@ -1,9 +1,10 @@
 extends ../layout
+//Todo: add bootstrap
 
 block content
     h1.
         Agendas: #{agendas.name}
-    form(action='/agendas/#{agendas._id}/edit',method='post',name='update',enctype='application/x-www-form-urlencoded')
+    form(action='/agendas/#{agendas._id}/editAgenda',method='post',name='update',enctype='application/x-www-form-urlencoded')
         p Name:
             input#inputName(type='text', value='#{agendas.name}', name='name')
         p Description:

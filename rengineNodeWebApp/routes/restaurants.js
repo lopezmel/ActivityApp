@@ -85,8 +85,8 @@ router.route('/')
     });
 
 //get request when adding a new activity
-router.get('/new', function(req, res) {
-    res.render('restaurants/new', { title: 'New Activity' });
+router.get('/newActivity', function(req, res) {
+    res.render('restaurants/newActivity', { title: 'New Activity' });
 });
 
 router.param('id', function(req, res, next, id) {
@@ -115,7 +115,7 @@ router.param('id', function(req, res, next, id) {
 
 
 //edit activity
-router.route('/:id/edit')
+router.route('/:id/editActivities')
     .get(function(req, res) {
         mongoose.model('Restaurants').findById(req.id, function (err, restaurants) {
             if (err) {
@@ -125,7 +125,7 @@ router.route('/:id/edit')
 
                 res.format({
                     html: function(){
-                        res.render('restaurants/edit', {
+                        res.render('restaurants/editActivities', {
                             title: 'Restaurants' + restaurants._id,
                             "restaurants" : restaurants
                         });
@@ -215,7 +215,7 @@ router.route('/:id')
                 console.log('Success ' + restaurants._id);
                 res.format({
                     html: function(){
-                        res.render('restaurants/show', {
+                        res.render('restaurants/details', {
                             "restaurants" : restaurants
                         });
                     },
