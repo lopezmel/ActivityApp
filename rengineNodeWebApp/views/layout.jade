@@ -1,10 +1,11 @@
 doctype html
+//extends _bootstrap
 html
   head
+    link(rel='stylesheet', href='css/HOMEedit.css')
+    link(rel='stylesheet', href='css/bootstrap.css')
+    //include bootstrap/inc/scripts
     title= title + ' | ' + appname
-    link(rel="stylesheet", href="/stylesheets/style.css")
-    link(rel="stylesheet", href="/bootstrap/bootstrap.css")
-    link(rel="stylesheet", href="/stylesheets/main.css")
 
   body
     .container
@@ -16,5 +17,3 @@ html
       //h1= title
       //p Welcome!
       block content
-  script(src='/javascripts/jquery.js', type="text/javascript")
-  script(src='/javascripts/main.js', type="text/javascript")
